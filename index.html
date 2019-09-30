@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Box that do stuff</title>
+  <title>Crystal Collector Game</title>
 
 
   <style>
@@ -27,15 +27,17 @@
 
 
   <div class="container">
-    <h3 class="target-score">Target Score: <span class="score">00</span></h3>
-    <h3 class="current">Current Score: <span class="current-score">00</span></h3>
-
     <div class="box-holder">
       <div class="box box1" data-which="0"></div>
       <div class="box box2" data-which="1"></div>
       <div class="box box3" data-which="2"></div>
       <div class="box box4" data-which="3"></div>
     </div class="box-holder">
+
+    <h3 class="target-score">Target Score: <span class="score">00</span></h3>
+    <h3 class="current">Current Score: <span class="current-score">00</span></h3>
+    <h3 class="wins-box">Wins: <span id="current-wins">0</span></h3>
+    <h3 class="losses-box">Losses: <span id="current-losses">0</span></h3>
   </div>
 
 
@@ -58,8 +60,10 @@
     //   }
     // }
 
-    var target_score = Math.floor((Math.random() * 101) + 20);
+    var target_score = Math.floor((Math.random() * 101) + 19);
     var current_score = 0;
+    var wins = 0;
+    var losses = 0;
 
     var ranNum1 = Math.floor((Math.random() * 12) + 1)
     var ranNum2 = Math.floor((Math.random() * 12) + 1)
@@ -87,18 +91,39 @@
 
       // current_score = current_score + addScore
       console.log(current_score);
+      console.log(wins);
+      console.log(losses);
       
+    checkScore();
       // Update Page;
-
-      updatePage();
-
-      // Evaluates game state
-
+    updatePage();
+      
     })
+
+    //  If current score > target, losses++, reset game
+    //  if current score = target, wins++, reset game
+
+
+function checkScore() {
+        if (current_score === target_score) {
+            alert("You're the crystal collector champion");
+            resetGame();
+            wins++;
+            $("#current-wins").text(wins++);
+        }
+        else if (current_score > target_score) {
+            alert("You lose!");
+            resetGame();
+            losses++;
+            $("#current-losses").text(losses++);
+        }
+}
+      
+    
 
     function resetGame() {
 
-      target_score = Math.floor((Math.random() * 101) + 20);
+      target_score = Math.floor((Math.random() * 101) + 19);
       current_score = 0;
 
       ranNum1 = Math.floor((Math.random() * 12) + 1)
