@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Box that do stuff</title>
+
+
+  <style>
+    .box-holder {
+      display: flex;
+      justify-content: space-evenly;
+      padding: 10px;
+    }
+
+    .box {
+      height: 200px;
+      width: 200px;
+      border: 1px black solid;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="container">
+    <h3 class="target-score">Target Score: <span class="score">00</span></h3>
+    <h3 class="current">Current Score: <span class="current-score">00</span></h3>
+
+    <div class="box-holder">
+      <div class="box box1" data-which="0"></div>
+      <div class="box box2" data-which="1"></div>
+      <div class="box box3" data-which="2"></div>
+      <div class="box box4" data-which="3"></div>
+    </div class="box-holder">
+  </div>
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+  <script>
+    // 19 - 120
+    // 1 - 12
+
+    // Global Variables use for the game
+
+
+    // function example() {
+    //   // do stuff
+
+    //   return function() {
+    //     var x
+    //   }
+    // }
+
+    var target_score = Math.floor((Math.random() * 101) + 20);
+    var current_score = 0;
+
+    var ranNum1 = Math.floor((Math.random() * 12) + 1)
+    var ranNum2 = Math.floor((Math.random() * 12) + 1)
+    var ranNum3 = Math.floor((Math.random() * 12) + 1)
+    var ranNum4 = Math.floor((Math.random() * 12) + 1);
+
+    var ranNumArr = [ranNum1, ranNum2, ranNum3, ranNum4];
+
+    console.log(ranNumArr);
+
+    // $(".box1").on("click", function() {
+    //   console.log("clicked")
+    //   console.log($(this).attr("data-which"))
+    // })
+
+    $(".box").on('click', function() {
+      console.log("-----------------------")
+      console.log($(this).attr("data-which"));
+      var place = $(this).attr("data-which");
+      var addScore = ranNumArr[place]
+      console.log(addScore)
+      console.log("------------------------")
+
+      current_score += addScore;
+
+      // current_score = current_score + addScore
+      console.log(current_score);
+      
+      // Update Page;
+
+      updatePage();
+
+      // Evaluates game state
+
+    })
+
+    function resetGame() {
+
+      target_score = Math.floor((Math.random() * 101) + 20);
+      current_score = 0;
+
+      ranNum1 = Math.floor((Math.random() * 12) + 1)
+      ranNum2 = Math.floor((Math.random() * 12) + 1)
+      ranNum3 = Math.floor((Math.random() * 12) + 1)
+      ranNum4 = Math.floor((Math.random() * 12) + 1);
+
+      ranNumArr = [ranNum1, ranNum2, ranNum3, ranNum4];
+
+    }
+
+    function updatePage() {
+      $(".score").text(target_score);
+      $(".current-score").text(current_score);
+    }
+
+
+    updatePage();
+
+
+
+  </script>
+</body>
+
+</html>
