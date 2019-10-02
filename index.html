@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Crystal Collector Game</title>
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <style>
     .box-holder {
@@ -20,17 +20,35 @@
       width: 200px;
       border: 1px black solid;
     }
+
+    .display-4 {
+      text-align:center;
+    }
+
+    .explain {
+      text-align:center;
+    }
+
   </style>
 </head>
 
 <body>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+          <h1 class="display-4">Crystal Collector Game</h1>
+          <p class="lead">
+              <h2 class="explain"><span class="explain">This is a crystal collector game. Click any of the four crystals to add to your score. Just don't go over.</spam></h2>
+              <h3 class="target-score">Target Score: <span class="score">00</span></h3>
+              <h3 class="current">Current Score: <span class="current-score">00</span></h3>
+              <h3 class="wins-box">Wins: <span id="current-wins">0</span></h3>
+              <h3 class="losses-box">Losses: <span id="current-losses">0</span></h3>
+          </p>
+        </div>
+      </div>
 
 
   <div class="container">
-      <h3 class="target-score">Target Score: <span class="score">00</span></h3>
-      <h3 class="current">Current Score: <span class="current-score">00</span></h3>
-      <h3 class="wins-box">Wins: <span id="current-wins">0</span></h3>
-      <h3 class="losses-box">Losses: <span id="current-losses">0</span></h3>
+      
       
     <div class="box-holder">
       <div class="box box1" data-which="0"></div>
@@ -38,7 +56,7 @@
       <div class="box box3" data-which="2"></div>
       <div class="box box4" data-which="3"></div>
     </div class="box-holder">
-
+  
    
   </div>
 
@@ -86,15 +104,15 @@
       console.log($(this).attr("data-which"));
       var place = $(this).attr("data-which");
       var addScore = ranNumArr[place]
-      console.log(addScore)
-      console.log("------------------------")
+      // console.log(addScore)
+      // console.log("------------------------")
 
       current_score += addScore;
 
       // current_score = current_score + addScore
-      console.log(current_score);
-      console.log(wins);
-      console.log(losses);
+      // console.log(current_score);
+      // console.log(wins);
+      // console.log(losses);
       
     checkScore();
       // Update Page;
@@ -107,17 +125,20 @@
 
 
 function checkScore() {
+  console.log("we got into the checkscore method")
         if (current_score === target_score) {
+            console.log("the score is a win");
             alert("You're the crystal collector champion");
             resetGame();
             wins++;
-            $("#current-wins").text(wins++);
+            $("#current-wins").text(wins);
         }
         else if (current_score > target_score) {
+            console.log("the score is a loss");
             alert("You lose!");
             resetGame();
-            losses++;
-            $("#current-losses").text(losses++);
+            losses++
+            $("#current-losses").text(losses);
         }
 }
       
